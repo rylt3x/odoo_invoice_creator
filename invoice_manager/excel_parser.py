@@ -56,13 +56,15 @@ class ExcelParser:
             })
 
         return parsed_data
-    def delete_file(self):
+
+    def _delete_file(self):
         os.remove(self.filename)
 
     @property
     def parsed_data(self):
         filepath = self._get_file_from_binary()
         parsed_data = self._parse_data(filepath)
+        self._delete_file()
         return parsed_data
 
 
