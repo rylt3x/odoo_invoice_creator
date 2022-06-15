@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-import os
-import odoo
-import datetime
-import xlrd
-import base64
 from  ..invoice_manager import create_invoice
 
 
