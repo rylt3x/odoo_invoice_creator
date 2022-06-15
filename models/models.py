@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from  ..invoice_manager import create_invoice
+from ..invoice_manager import create_invoice
+from ..invoice_manager import config
 
 
 class Attachment(models.Model):
@@ -31,5 +32,6 @@ class Attachment(models.Model):
 
     def create_invoice(self):
         for s in self:
+            # print(config.UPLOAD_DIR)
             create_invoice(s, s.file_path)
         return

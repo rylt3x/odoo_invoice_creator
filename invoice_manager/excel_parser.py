@@ -2,6 +2,7 @@ import xlrd
 import base64
 import datetime
 import os
+from . import config
 
 
 class ExcelParser:
@@ -17,11 +18,12 @@ class ExcelParser:
     # Create excel file from bytes to make possible to open it
     def _get_file_from_binary(self):
         filename = self._get_filename()
-        file = open(filename, 'wb')
+        filepath = os.path.join(config.UPLOAD_DIR, filename)
+        file = open(filepath, 'wb')
         file.write(base64.decodebytes(self.binary))
         file.close()
-        self.filename = filename
-        return filename
+        self.filepath = filepath
+        return filepath
 
     # Get dict from excel file
     @staticmethod
@@ -58,7 +60,7 @@ class ExcelParser:
         return parsed_data
 
     def _delete_file(self):
-        os.remove(self.filename)
+        os.remove(self.filepath)
 
     @property
     def parsed_data(self):
